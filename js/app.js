@@ -24,26 +24,42 @@ function verifyInputs(e) {
 }
 
 function startAlgorithm(seedNumber, iterations) {
-    squareNumber = seedNumber ** 2;
-    for (i = 0; i <= iterations; i++) {
-        numberAsString = squareNumber.toString();
-        if (squareNumber.length % 2 === 0) {
-            middleNumbers = numberAsString.substr(numberAsString.length - 2, numberAsString.length - 1);
+    let seed = seedNumber;
+
+    for (i = 1; i <= iterations; i++) {
+        let row;
+        let squaredNumber = seedNumber ** 2;
+        let numberAsString = squaredNumber.toString();
+
+        if (squaredNumber.length % 2 === 0) {
+            seedNumber = numberAsString.substr(numberAsString.length - 2, numberAsString.length - 1);
         } else {
             numberAsString = '0' + numberAsString;
             halfOfTheNumber = Math.round(numberAsString.length / 2);
-            middleNumbers = numberAsString.substr(halfOfTheNumber - 2, halfOfTheNumber - 1);
+            seedNumber = numberAsString.substr(halfOfTheNumber - 2, halfOfTheNumber - 1);
         }
 
-        let row = {
-            iteration: i,
-            randomNumber: middleNumbers,
-            squaredNumber: squareNumber,
-            pseudo:     middleNumbers
-        };
 
+        if (i === 1) {
+            row = {
+                iteration: i,
+                randomNumber: seed,
+                squaredNumber: squaredNumber,
+                pseudo:     seedNumber
+            };
+        } else {
+            row = {
+                iteration: i,
+                randomNumber: seedNumber,
+                squaredNumber: squaredNumber,
+                pseudo:     seedNumber
+            };   
+        }
+        
+    
         renderRows(row);
-        squareNumber = middleNumbers ** 2;
+        squaredNumber = seedNumber ** 2;
+        console.log(seedNumber, squaredNumber);
     }
     
     //Make a par number
@@ -62,6 +78,6 @@ function renderRows(row) {
     `;
 
     //Insert the row in the table
-    table.innerHTML = html;
+    table.innerHTML += html;
 }
 
