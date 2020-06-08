@@ -15,13 +15,31 @@ function verifyInputs(e) {
     let seedNumber = document.querySelector('#seedNumber').value,
         iterations = document.querySelector('#iterations').value;
 
+
+    //Verify if the table has childrens
+    if (table.childElementCount > 0 ) {
+        removeResult();
+    }    
+
     //Verify the seed length is greater than 3
     if (seedNumber !== '' && iterations !== '') {
         if (seedNumber.length > 3) {
             //Start the algorithm
             startAlgorithm(seedNumber, iterations);
         } else {
+            alert('Insert a seed number with 4 digits');
+        }
+    } else {
+        alert('Fill the inputs');
+    }
+}
 
+//Removes the elements in the table before start a new session
+function removeResult() {
+    let rows = table.children;
+    while(table.childElementCount > 0) {
+        for(let row of rows) {
+            row.remove();
         }
     }
 }
@@ -77,7 +95,7 @@ function renderRows(row) {
         <th scope="row">${row.iteration}</th>
         <td>${row.randomNumber}</td>
         <td>${row.squaredNumber}</td>
-        <td>${row.pseudo}</td>
+        <td>0.${row.pseudo}</td>
     </tr>
     `;
 
