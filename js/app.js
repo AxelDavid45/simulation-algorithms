@@ -54,10 +54,14 @@ function startAlgorithm(seedNumber, iterations) {
 function renderRows(row) {
     let html = `
     <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
+        <th scope="row">${row.iteration}</th>
+        <td>${row.randomNumber}</td>
+        <td>${row.squaredNumber}</td>
+        <td>${row.pseudo}</td>
     </tr>
     `;
+
+    //Insert the row in the table
+    table.innerHTML = html;
 }
+
