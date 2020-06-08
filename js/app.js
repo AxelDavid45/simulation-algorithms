@@ -17,9 +17,9 @@ function verifyInputs(e) {
 
 
     //Verify if the table has childrens
-    if (table.childElementCount > 0 ) {
+    if (table.childElementCount > 0) {
         removeResult();
-    }    
+    }
 
     //Verify the seed length is greater than 3
     if (seedNumber !== '' && iterations !== '') {
@@ -37,8 +37,8 @@ function verifyInputs(e) {
 //Removes the elements in the table before start a new session
 function removeResult() {
     let rows = table.children;
-    while(table.childElementCount > 0) {
-        for(let row of rows) {
+    while (table.childElementCount > 0) {
+        for (let row of rows) {
             row.remove();
         }
     }
@@ -71,22 +71,22 @@ function startAlgorithm(seedNumber, iterations) {
                 iteration: i,
                 randomNumber: seed,
                 squaredNumber: squaredNumber,
-                pseudo:     seedNumber
+                pseudo: seedNumber
             };
         } else {
             row = {
                 iteration: i,
                 randomNumber: seedNumber,
                 squaredNumber: squaredNumber,
-                pseudo:     seedNumber
-            };   
+                pseudo: seedNumber
+            };
         }
-        
+
         //Insert the row with data in the table
         renderRows(row);
     }
 }
-    
+
 
 function renderRows(row) {
     // Creates the row with the data
