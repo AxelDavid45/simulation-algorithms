@@ -6,3 +6,4 @@ The interface was created with Bootstrap and the interactivity with JavaScript.
 - Axel David Espinosa Meneses
 - Idi Amin Gonzalez Martinez
 - Francisco Escalera Sierra
+- Edson Jahir Martínez Vásquez
