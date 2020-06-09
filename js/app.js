@@ -25,7 +25,7 @@ function verifyInputs(e) {
     if (seedNumber !== '' && iterations !== '') {
         if (seedNumber.length > 3) {
             //Start the algorithm
-            startAlgorithm(seedNumber, iterations);
+            middleSquares(seedNumber, iterations);
         } else {
             alert('Insert a seed number with 4 digits');
         }
@@ -44,7 +44,7 @@ function removeResult() {
     }
 }
 
-function startAlgorithm(seedNumber, iterations) {
+function middleSquares(seedNumber, iterations) {
     //Save the original number used as a sedd
     let seed = seedNumber;
 
