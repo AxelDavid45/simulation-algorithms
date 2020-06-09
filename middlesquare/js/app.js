@@ -13,14 +13,8 @@ function verifyInputs(e) {
     e.preventDefault();
     //Obtains the data
     let seedNumber = document.querySelector('#seedNumber').value,
-        iterations = document.querySelector('#iterations').value,
-        dropDownList = document.querySelector('#algorithm'),
-        selection = dropDownList.options[dropDownList.selectedIndex].value;
+        iterations = document.querySelector('#iterations').value;
  
-
-    if (selection === 'constant') {
-        addConstantField();
-    }    
 
     //Verify if the table has childrens
     if (table.childElementCount > 0) {
@@ -30,7 +24,6 @@ function verifyInputs(e) {
     //Verify the seed length is greater than 3
     if (seedNumber !== '' && iterations !== '') {
         if (seedNumber.length > 3) {
-
             //Start the algorithm
             middleSquares(seedNumber, iterations);
         } else {
