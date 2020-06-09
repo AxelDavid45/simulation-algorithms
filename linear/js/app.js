@@ -29,9 +29,11 @@ function verifyInputs(e) {
         && constant !== '' && moduleValue !== '') {
         if (seedNumber.length > 0) {
             if (constant % 2 !== 0) {
-                //Start the algorithm
+                //Calculate the multiplier 
                 multiplier = 1 + (4 * multiplier);
+                //Calculate the module
                 moduleValue = 2 ** moduleValue;
+                //Start the algorithm
                 linearCongruential(seedNumber, multiplier, constant, moduleValue, iterations);
             } else {
                 alert('Insert a odd number in the constant');
@@ -57,34 +59,42 @@ function removeResult() {
 function linearCongruential(seedNumber, multiplier, constant, moduleValue, iterations) {
     //Save the original number used as a sedd
     let seed = parseInt(seedNumber);
+    //Variable for saving previous numbers
     let previousNumber = [];
     for (i = 1; i <= iterations; i++) {
         //Initiate variables
         let row;
         let newSeed, randomNumber;
+
         if (i === 1) {
+            //Calculate the first row
             newSeed = (multiplier * parseInt(seedNumber) + parseInt(constant)) % moduleValue;
             randomNumber = newSeed / (moduleValue - 1);
-            console.log(seedNumber, constant, moduleValue, newSeed, randomNumber);
+
+            //Create the row object
             row = {
                 iteration: i,
                 xSubI: seed,
                 pseudo: randomNumber
             }
-            
+
         } else {
+            //Calculate the missing numbers
             newSeed = (multiplier * previousNumber[0] + parseInt(constant)) % moduleValue;
             randomNumber = newSeed / (moduleValue - 1);
-            console.log(seedNumber, constant, moduleValue, newSeed, randomNumber);
 
+            //Create the  row object
             row = {
                 iteration: i,
                 xSubI: newSeed,
                 pseudo: randomNumber
             }
+
         }
 
+        //Save the previous number generated 
         previousNumber[0] = newSeed;
+        
         //Insert the row with data in the table
         renderRows(row);
     }
