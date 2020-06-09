@@ -12,14 +12,14 @@
 <body>
     <nav class="navbar navbar-light bg-dark">
         <a class="navbar-brand text-light" href="#">
-            <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+            <img src="../images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
             Equipo Loks - S4A
         </a>
     </nav>
 
 
     <main class="container">
-        <h2 class="text-center my-3">Middle-square pseudorandom numbers</h2>
+        <h2 class="text-center my-3">Constant Multiplier pseudorandom numbers</h2>
         <div class="row">
             <div class="col-4">
                 <div class="card">
@@ -35,14 +35,10 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="algorithm">Choose an algorithm</label>
-                                <select id="algorithm" class="form-control"> 
-                                    <option value="">Choose an option</option>
-                                    <option value="middle">Middle-Squares</option>
-                                    <option value="constant">Constant Multiplier</option>
-                                    <option value="linear">Linear Congruential</option>
-                                </select>
+                                <label for="constant">Constant</label>
+                                <input type="number" class="form-control" id="constant" min="2">
                             </div>
+
                             <div class="form-group">
                                 <label for="iterations">Generate</label>
                                 <input type="number" class="form-control" id="iterations" min="1" value="1">
