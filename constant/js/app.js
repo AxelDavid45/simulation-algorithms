@@ -14,13 +14,8 @@ function verifyInputs(e) {
     //Obtains the data
     let seedNumber = document.querySelector('#seedNumber').value,
         iterations = document.querySelector('#iterations').value,
-        dropDownList = document.querySelector('#algorithm'),
-        selection = dropDownList.options[dropDownList.selectedIndex].value;
- 
+        constant = document.querySelector('#constant').value;
 
-    if (selection === 'constant') {
-        addConstantField();
-    }    
 
     //Verify if the table has childrens
     if (table.childElementCount > 0) {
@@ -29,12 +24,11 @@ function verifyInputs(e) {
 
     //Verify the seed length is greater than 3
     if (seedNumber !== '' && iterations !== '') {
-        if (seedNumber.length > 3) {
-
+        if (seedNumber.length > 3 && constant.length > 3) {
             //Start the algorithm
-            middleSquares(seedNumber, iterations);
+            constantMultiplier(seedNumber, constant, iterations);
         } else {
-            alert('Insert a seed number with 4 digits');
+            alert('Insert a seed/constant number with 4 digits');
         }
     } else {
         alert('Fill the inputs');
@@ -51,18 +45,19 @@ function removeResult() {
     }
 }
 
-function middleSquares(seedNumber, iterations) {
+function constantMultiplier(seedNumber, constant, iterations) {
     //Save the original number used as a sedd
     let seed = seedNumber;
 
     for (i = 1; i <= iterations; i++) {
         //Initiate variables
         let row;
-        let squaredNumber = seedNumber ** 2;
-        let numberAsString = squaredNumber.toString();
+        let previousNumber = [seedNumber];
+        let newSeed = seedNumber * constant;
+        let numberAsString = newSeed.toString();
 
         //Verify the length of the seed
-        if (squaredNumber.length % 2 === 0) {
+        if (newSeed.length % 2 === 0) {
             seedNumber = numberAsString.substr(numberAsString.length - 2, numberAsString.length - 1);
         } else {
             //Add a zero if the length of the number is odd 
@@ -72,25 +67,29 @@ function middleSquares(seedNumber, iterations) {
             seedNumber = numberAsString.substr(halfOfTheNumber - 2, halfOfTheNumber - 1);
         }
 
+        
         //Create the object row depending on the iteration number
         if (i === 1) {
             row = {
                 iteration: i,
-                randomNumber: seed,
-                squaredNumber: squaredNumber,
+                seed: seed,
+                randomNumber: newSeed,
                 pseudo: seedNumber
             };
         } else {
             row = {
                 iteration: i,
-                randomNumber: seedNumber,
-                squaredNumber: squaredNumber,
+                seed: previousNumber[0],
+                randomNumber: newSeed,
                 pseudo: seedNumber
             };
         }
 
+        //Save the previous number
+        previousNumber[0] = seedNumber;
         //Insert the row with data in the table
         renderRows(row);
+        
     }
 }
 
@@ -100,8 +99,8 @@ function renderRows(row) {
     let html = `
     <tr>
         <th scope="row">${row.iteration}</th>
+        <td>${row.seed}</td>
         <td>${row.randomNumber}</td>
-        <td>${row.squaredNumber}</td>
         <td>0.${row.pseudo}</td>
     </tr>
     `;
